@@ -18,7 +18,7 @@
 
 '''
 My Awesome Python Calculator
-Modified on 22/10/2020
+Modified on 26/10/2020
 '''
 import tkinter as tk
 from ttkwidgets.autocomplete import AutocompleteCombobox
@@ -66,13 +66,13 @@ def resize(event):
     if event==1:
         for i in window.grid_slaves():
             i.config(font=[font_face_var.get(), size_var.get(), 'bold'])
-    elif event.keycode==13:
+    elif event.keysym=="Return":
         for i in window.grid_slaves():
             i.config(font=[font_face_var.get(), size_var.get(), 'bold'])
 
 def function_select(event):
     global function_list
-    if event.keycode==13 and function_input_var.get()!='' and (function_input_var.get() in function_list):
+    if event.keysym=="Return" and function_input_var.get()!='' and (function_input_var.get() in function_list):
         pos=text.index(tk.INSERT)
         input_var.set(input_var.get()[0:pos]+function_input_var.get()+'()'+input_var.get()[pos:len(input_var.get())])
         text.icursor(pos+len(function_input_var.get())+1)
@@ -416,7 +416,7 @@ window_menus.add_command(label='! HELP !',command=_help_)
 tk.Label(window,background='cornflower blue',borderwidth=0).grid(row=0,column=0,columnspan=6,sticky='news',padx=5,pady=5)
 
 text=tk.Entry(window,textvariable=input_var,background='cornflower blue',font=font,borderwidth=0,justify='center')
-text.bind('<Key>',lambda event: result_area.focus_set() if (event.keycode==13) else None)
+text.bind('<Return>',lambda event: result_area.focus_set())
 text.bind('<Control-BackSpace>',lambda event: clear_input())
 text.bind('<Shift-BackSpace>',lambda event: save_and_clear_input())
 text.grid(row=0,column=0,columnspan=6,sticky='news',padx=15,pady=5)
@@ -424,7 +424,7 @@ text.grid(row=0,column=0,columnspan=6,sticky='news',padx=15,pady=5)
 tk.Label(window,background='DarkSeaGreen1',borderwidth=0).grid(row=1,column=0,columnspan=6,sticky='news',padx=5,pady=5)
 
 result_area=tk.Entry(window,textvariable=result_var,background='DarkSeaGreen1',font=font,borderwidth=0,justify='center')
-result_area.bind('<Key>',lambda event: text.focus_set() if (event.keycode==13) else None)
+result_area.bind('<Return>',lambda event: text.focus_set())
 result_area.grid(row=1,column=0,columnspan=6,sticky='news',padx=15,pady=5)
 
 button1=HoverButton(window,text='1',font=font,borderwidth=0,bg='white',command=lambda: input_to_input_var('1'),activebackground=active_button_background,takefocus=0)
@@ -480,7 +480,7 @@ button_decimals.grid(row=6,column=0,sticky='news',padx=5,pady=5)
 
 deg_rad_button=tk.Button(window,text='deg',font=font,borderwidth=0,bg='hot pink',command=lambda: deg_rad_function(),activebackground=active_button_background)
 deg_rad_button.grid(row=6,column=1,sticky='news',padx=5,pady=5)
-deg_rad_button.bind('<Key>',lambda event: deg_rad_function() if event.keycode==13 else False)
+deg_rad_button.bind('<Return>',lambda event: deg_rad_function())
 deg_rad_button.bind('<FocusIn>',lambda event: deg_rad_button.config(bg='MediumPurple1'))
 deg_rad_button.bind('<FocusOut>',lambda event: deg_rad_button.config(bg='hot pink') if deg_rad_var.get()==0 else deg_rad_button.config(bg='turquoise1'))
 
