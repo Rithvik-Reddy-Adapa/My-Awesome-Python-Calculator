@@ -66,9 +66,11 @@ def resize(event):
     if event==1:
         for i in window.grid_slaves():
             i.config(font=[font_face_var.get(), size_var.get(), 'bold'])
+            text.focus_set()
     elif event.keysym=="Return":
         for i in window.grid_slaves():
             i.config(font=[font_face_var.get(), size_var.get(), 'bold'])
+            text.focus_set()
 
 def function_select(event):
     global function_list
