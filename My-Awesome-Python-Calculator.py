@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 '''
     My Awesome Python Calculator - A simple scientific calculator using python3.
     Copyright (C) Year: 2020,  Author: Rithvik Reddy Adapa
